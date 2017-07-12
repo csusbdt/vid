@@ -1,6 +1,14 @@
 /*
-This program generates an mpeg4 video file 
-with pixel animations and wave music.
+This program generates an mpeg4 video file with 
+coordinated pixel animations and wave music.
+
+Approach:
+
+1) Write audio samples into audio.raw and write
+   video frames into video.mp4.
+
+2) Run ffmpeg to merge audio.raw and video.mp4 
+   into kronos.mp4.
 */
 
 #include <iostream>
@@ -9,85 +17,73 @@ with pixel animations and wave music.
 #include <stdio.h>
 #include <cassert>
 #include <cerrno>
-
-typedef unsigned char byte;
+#include "Kronos.h"
 
 using namespace std;
 
-#define W 720
-#define H 480
+typedef unsigned char byte;
 
-const double frames_per_second = 30;
-const int duration_in_seconds = 3;
-
-unsigned char frame[H][W][3];
-
-void clear_frame() { memset(frame, 0, sizeof(frame)); }
-void draw_rect(int x, int y, int w, int h, byte r, byte g, byte b);
-
-void draw_frame(double t) {
-	clear_frame();
-	const double pps = 120; // pixels per second
-	draw_rect(0 + t * pps, 0 + t * pps, 20, 10, 0x00, 0xff, 0x00);
-}
-
-// Constrain point to frame.
-void clamp(int * x, int * y) {
-	if (*x < 0) *x = 0; else if (*x > W) *x = W;
-	if (*y < 0) *y = 0; else if (*y > H) *y = H;
-}
-
-void draw_rect(int x, int y, int w, int h, byte r, byte g, byte b) {
-	int x0 = x;
-	int x1 = x + w;
-	int y0 = y;
-	int y1 = y + h;
-	clamp(&x0, &y0);
-	clamp(&x1, &y1);
-	for (int y = y0; y < y1; ++y) {
-		for (int x = x0; x < x1; ++x) {
-			frame[y][x][0] = r;
-			frame[y][x][1] = g;
-			frame[y][x][2] = b;
-		}
-	}
-}
+Kronos kronos;
 
 int main(int argc, char * argv[]) {
-	const char * cmd = 
+	const char * audio_cmd = 
 		"ffmpeg               "
 		"-y                   "
 		"-hide_banner         "
-		"-f rawvideo          " // input to be raw video data
-		"-pixel_format rgb24  "
-		"-video_size 720x480  "
-		"-framerate 30        " // frames per second
-		"-i -                 " // read data from the standard input stream
-		"-pix_fmt yuv420p     " // to render with Quicktime
-		"-vcodec mpeg4        "
-		"-an                  " // no audio
-		"-q:v 5               " // quality level; 1 <= q <= 32
-		"kronos.mp4           ";
+		"-f s16le             "
+		"-ar 48000            "
+		"-ac 1                "
+		"-i -                 "
+		"audio.wav            ";
 	assert(errno == 0);
-	FILE * raw_video_in = popen(cmd, "w");
-	if (raw_video_in == 0) {
+	FILE * raw_audio_out = popen(audio_cmd, "w");
+	if (raw_audio_out == 0) {
 		assert(errno != 0);
-		cout << "Failed to get raw_video_in pointer: ";
+		cout << "Failed to get raw_audio_out pointer: ";
 		cout << strerror(errno);
 		cout << endl;
 		return 1;
 	}
 
-	int num_frames = duration_in_seconds * frames_per_second;
+	stringstream video_cmd;
+	video_cmd << "ffmpeg "              ;
+	video_cmd << "-y "                  ;
+	video_cmd << "-hide_banner "        ;
+	video_cmd << "-f rawvideo "         ; // input to be raw video data
+	video_cmd << "-pixel_format rgb24 " ;
+	video_cmd << "-video_size "         ;
+	video_cmd << kronos.video_width     ;
+	video_cmd << " "                    ;
+	video_cmd << kronos.video_height    ;
+	video_cmd << " "                    ;
+	video_cmd << "-framerate  "         ; // frames per second
+	video_cmd << kronos.video_framerate ;
+	video_cmd << " "                    ;
+	video_cmd << "-i - "                ; // read data from the standard input stream
+	video_cmd << "-pix_fmt yuv420p "    ; // to render with Quicktime
+	video_cmd << "-vcodec mpeg4 "       ;
+	video_cmd << "-an "                 ; // no audio
+	video_cmd << "-q:v 5 "              ; // quality level; 1 <= q <= 32
+	video_cmd << "video.mp4 "           ;
 
-	for (int i = 0; i < num_frames; ++i) {
-		double time_in_seconds = i / frames_per_second;
-		draw_frame(time_in_seconds);
-		fwrite(frame, 3, W * H, raw_video_in);
+	assert(errno == 0);
+	FILE * raw_video_out = popen(video_cmd.str().c_str(), "w");
+	if (raw_video_out == 0) {
+		assert(errno != 0);
+		cout << "Failed to get raw_video_out pointer: ";
+		cout << strerror(errno);
+		cout << endl;
+		return 1;
 	}
 
-	fflush(raw_video_in);
-	pclose(raw_video_in);
+	int return_value = kronos.write(raw_audio_out, raw_video_out);
+	if (return_value != 0) return return_value;
+
+	fflush(raw_audio_out);
+	pclose(raw_audio_out);
+
+	fflush(raw_video_out);
+	pclose(raw_video_out);
 
 	cout << "Done." << endl;
 
