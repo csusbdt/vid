@@ -53,7 +53,7 @@ int main(int argc, char * argv[]) {
 	video_cmd << "-pixel_format rgb24 " ;
 	video_cmd << "-video_size "         ;
 	video_cmd << kronos.video_width     ;
-	video_cmd << " "                    ;
+	video_cmd << "x"                    ;
 	video_cmd << kronos.video_height    ;
 	video_cmd << " "                    ;
 	video_cmd << "-framerate  "         ; // frames per second

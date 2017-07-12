@@ -1,6 +1,6 @@
 c++ *.cpp           &&\
 ./a.out             &&\
-ffmpg            \
+ffmpeg           \
    -y            \
    -hide_banner  \
    -i audio.wav  \

@@ -53,7 +53,7 @@ int Kronos::write(FILE * raw_audio_out, FILE * raw_video_out) {
 	for (int i = 0; i < num_frames; ++i) {
 		double time_in_seconds = i / frames_per_second;
 		draw_frame(time_in_seconds);
-//		fwrite(frame, 3, video_width * video_height, raw_video_out);
+		fwrite(frame, 3, video_width * video_height, raw_video_out);
 	}
 	return 0;
 }
