@@ -1,0 +1,35 @@
+#include "Background.h"
+
+void Background::init() {
+	addRandomPixels(1.0);
+}
+
+void Background::draw(double t) {
+	addRandomPixels(.002);
+}
+
+void Background::mix(double t) {
+	short sample = sin(t * 2 * PI / 180) * SHRT_MAX;
+	audio.mix(sample);
+}
+
+/*! Allows rectangular pixels of any size. 
+    Use prob of 1 at startup to set every pixel in the frame.
+*/
+void Background::addRandomPixels(double prob, int pixelWidth = 4, int pixelHeight = 4) {
+	Rect pixel(0, 0, pixelWidth, pixelHeight);
+	for (pixel.y = 0; pixel.y < h; pixel.y += pixelHeight) {
+		for (pixel.x = 0; pixel.x < w; pixel.x += pixelWidth) {
+			if (Util::randomBool(prob)) {
+				int hue = Util::randomInt(0, 360);
+				double fr, fg, fb;
+				Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
+				char r = Util::doubleToChar(fr);
+				char g = Util::doubleToChar(fg);
+				char b = Util::doubleToChar(fb);
+				pixel.paint(r, g, b);
+			}
+		}
+	}	
+}
+

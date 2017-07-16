@@ -2,59 +2,48 @@
 #include <cassert>
 #include <climits>
 #include <cstring>
+#include <vector>
 #include "Kronos.h"
+#include "globals.h"
+//#include "Disc.h"
 
-const double PI = 3.14159265359;
+//static Disc disc;
+//	Disc disc(Frame::w / 2, Frame::h / 2, Frame::h / 5);
 
-extern Kronos kronos;
+int Kronos::write() {
+	// Convert to scenes.
+	background.init();
+	objects.push_back(&background);
 
-void Kronos::clear_frame() { memset(frame, 0, video_height * video_width * 3); }
-
-void Kronos::draw_frame(double t) {
-	clear_frame();
-	const double pps = 120; // pixels per second
-	draw_rect(0 + t * pps, 0 + t * pps, 20, 10, 0x00, 0xff, 0x00);
-}
-
-// Constrain point to frame.
-void Kronos::clamp(int * x, int * y) {
-	if (*x < 0) *x = 0; else if (*x >= kronos.video_width) *x = kronos.video_width - 1;
-	if (*y < 0) *y = 0; else if (*y >= kronos.video_height) *y = kronos.video_height - 1;
-}
-
-void Kronos::draw_rect(int x, int y, int w, int h, byte r, byte g, byte b) {
-	int x0 = x;
-	int x1 = x + w;
-	int y0 = y;
-	int y1 = y + h;
-	clamp(&x0, &y0);
-	clamp(&x1, &y1);
-	for (int y = y0; y < y1; ++y) {
-		for (int x = x0; x < x1; ++x) {
-			frame[y * W * 3 + x * 3 + 0] = r;
-			frame[y * W * 3 + x * 3 + 1] = g;
-			frame[y * W * 3 + x * 3 + 2] = b;
+	double t = 0;  // Time t is in seconds.
+	double nextFrameTime = 0;
+	frame.addRandomPixels(4, 4, 1.0);
+	for (double t = 0; t < duration_in_seconds; t += 1.0 / samples_per_second) {
+		audio.sample = 0; // redundant
+		for (int i = 0; i < objects.size(); ++i) {
+			Object * object = objects[i];
+			object->mix(t);
+		}
+		audio.writeSample();
+		if (t >= nextFrameTime) {
+			for (int i = 0; i < objects.size(); ++i) {
+				Object * object = objects[i];
+				object->draw(t);
+			}
+			video.writeFrame();
+			nextFrameTime += 1.0 / frames_per_second;
+		}
+		// Remove inactive objects.
+		int i = 0;
+		int k = 0;
+		while (i < objects.size()) {
+			if (objects[i]->active) {
+				objects[k++] = objects[i];
+			}
+			++i;
 		}
 	}
-}
 
-int Kronos::write(FILE * raw_audio_out, FILE * raw_video_out) {
-	const double duration_in_seconds = 5;
-
-	const double samples_per_second = 48000;
-	int num_samples = duration_in_seconds * samples_per_second;
-	for (int i = 0; i < num_samples; ++i) {
-		short sample = sin(2 * PI * i / 180.0) * SHRT_MAX;
-		fwrite(reinterpret_cast<unsigned char *>(&sample), 1, 2, raw_audio_out);
-	}
-
-	const double frames_per_second = 30;
-	int num_frames = duration_in_seconds * frames_per_second;
-	for (int i = 0; i < num_frames; ++i) {
-		double time_in_seconds = i / frames_per_second;
-		draw_frame(time_in_seconds);
-		fwrite(frame, 3, video_width * video_height, raw_video_out);
-	}
 	return 0;
 }
 

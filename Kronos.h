@@ -1,20 +1,16 @@
 #pragma once
 
 #include <stdio.h>
-
-#define W 720
-#define H 480
-
-typedef unsigned char byte;
+#include "globals.h"
 
 class Kronos {
 public:
-	Kronos() : video_width(W), video_height(H), video_framerate(30) { 
-		frame = new byte[H * W * 3];
+	Kronos() {
+		//frame = new byte[videoWidth * videoHeight * 3];
 	};
 
 	~Kronos() {
-		delete [] frame;
+		//delete [] frame;
 	}
 
 	void clear_frame();
@@ -22,12 +18,7 @@ public:
 	void clamp(int * x, int * y);
 	void draw_rect(int x, int y, int w, int h, byte r, byte g, byte b);
 
-	int write(FILE * raw_audio_out, FILE * raw_video_out);
-
-	const int video_width;
-	const int video_height;
-	const int video_framerate;
-
-	byte * frame;
+	//int write(FILE * raw_audio_out, FILE * raw_video_out);
+	int write();
 };
 
