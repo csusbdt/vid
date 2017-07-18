@@ -1,18 +1,26 @@
+#include <cassert>
+#include <iostream>
+#include <sstream>
 #include <sys/stat.h>
-include "Audio.h"
+#include "globals.h"
+#include "Audio.h"
+
+using namespace std;
 
 void Audio::open() {
-	const char * audio_cmd = 
-		"ffmpeg               "
-		"-y                   "
-		"-hide_banner         "
-		"-f s16le             "
-		"-ar 48000            "
-		"-ac 1                "
-		"-i -                 "
-		"audio.wav            ";
+	stringstream cmd;
+		cmd << "ffmpeg                 ";
+		cmd << "-y                     ";
+		cmd << "-hide_banner           ";
+		cmd << "-f s16le               ";
+		cmd << "-ar                    ";
+		cmd << samples_per_second << " ";
+		cmd << "-ac 1                  ";
+		cmd << "-i -                   ";
+		cmd << "audio.wav              ";
+
 	assert(errno == 0);
-	file = popen(audio_cmd, "w");
+	file = popen(cmd.str().c_str(), "w");
 	if (file == 0) {
 		assert(errno != 0);
 		cout << "ffmpeg failed in Audio.cpp: ";

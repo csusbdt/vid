@@ -1,4 +1,8 @@
+#include <cmath>
+#include "globals.h"
 #include "Background.h"
+#include "Rect.h"
+#include "Util.h"
 
 void Background::init() {
 	addRandomPixels(1.0);
@@ -16,10 +20,10 @@ void Background::mix(double t) {
 /*! Allows rectangular pixels of any size. 
     Use prob of 1 at startup to set every pixel in the frame.
 */
-void Background::addRandomPixels(double prob, int pixelWidth = 4, int pixelHeight = 4) {
+void Background::addRandomPixels(double prob, int pixelWidth, int pixelHeight) {
 	Rect pixel(0, 0, pixelWidth, pixelHeight);
-	for (pixel.y = 0; pixel.y < h; pixel.y += pixelHeight) {
-		for (pixel.x = 0; pixel.x < w; pixel.x += pixelWidth) {
+	for (pixel.y = 0; pixel.y < frame_height; pixel.y += pixelHeight) {
+		for (pixel.x = 0; pixel.x < frame_width; pixel.x += pixelWidth) {
 			if (Util::randomBool(prob)) {
 				int hue = Util::randomInt(0, 360);
 				double fr, fg, fb;

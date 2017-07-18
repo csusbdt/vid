@@ -5,12 +5,14 @@
 
 class Frame {
 public:
-	Frame() {}
+	Frame();
+	~Frame();
+	void setPixel(int x, int y, byte r, byte g, byte b);
 	void write(FILE * outputStream);
 	void addRandomPixels(double prob, int pixelWidth = 4, int pixelHeight = 4);
 	void clear();
 	void clamp(int * x, int * y);
 
-	pixel * frame;
+	byte * data;
 };
 

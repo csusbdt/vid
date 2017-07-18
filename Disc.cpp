@@ -1,5 +1,6 @@
 #include <climits>
-#include "global.h"
+#include <cmath>
+#include "globals.h"
 #include "Disc.h"
 
 void Disc::mix(double t) {

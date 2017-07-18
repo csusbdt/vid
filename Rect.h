@@ -1,6 +1,7 @@
 #pragma once
 
-typedef unsigned char byte;
+#include "globals.h"
+#include "Rect.h"
 
 class Rect {
 public:

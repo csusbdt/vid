@@ -27,7 +27,7 @@ Background background;
 vector<Object *> objects;
 
 int main(int argc, char * argv[]) {
-	frame.init();
+	frame.clear();
 	audio.open();
 	video.open();
 	kronos.write();
