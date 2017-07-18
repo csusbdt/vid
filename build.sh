@@ -1,4 +1,7 @@
+cd src              &&\
 c++ *.cpp           &&\
+cd ..               &&\
+mv src/a.out .      &&\
 ./a.out             &&\
 ffmpeg           \
    -y            \
