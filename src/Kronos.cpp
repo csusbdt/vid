@@ -30,7 +30,7 @@ int Kronos::write() {
 				Object * object = objects[i];
 				object->draw(t);
 			}
-//			video.writeFrame();
+			video.writeFrame();
 			nextFrameTime += 1.0 / frames_per_second;
 		}
 		// Remove inactive objects.

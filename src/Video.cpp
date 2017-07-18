@@ -15,7 +15,7 @@ void Video::open() {
 	video_cmd << "-pixel_format rgb24  ";
 	video_cmd << "-video_size          ";
 	video_cmd << frame_width            ;
-	video_cmd << "x                    ";
+	video_cmd << "x";
 	video_cmd << frame_height           ;
 	video_cmd << "                     ";
 	video_cmd << "-framerate           "; 
