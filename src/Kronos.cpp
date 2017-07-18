@@ -20,7 +20,6 @@ int Kronos::write() {
 	double nextFrameTime = 0;
 	frame.addRandomPixels(4, 4, 1.0);
 	for (double t = 0; t < duration_in_seconds; t += 1.0 / samples_per_second) {
-cout << t << " ";
 		for (int i = 0; i < objects.size(); ++i) {
 			Object * object = objects[i];
 			object->mix(t);
@@ -31,7 +30,7 @@ cout << t << " ";
 				Object * object = objects[i];
 				object->draw(t);
 			}
-			video.writeFrame();
+//			video.writeFrame();
 			nextFrameTime += 1.0 / frames_per_second;
 		}
 		// Remove inactive objects.

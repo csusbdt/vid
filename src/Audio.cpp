@@ -9,15 +9,15 @@ using namespace std;
 
 void Audio::open() {
 	stringstream cmd;
-		cmd << "ffmpeg                 ";
-		cmd << "-y                     ";
-		cmd << "-hide_banner           ";
-		cmd << "-f s16le               ";
-		cmd << "-ar                    ";
-		cmd << samples_per_second << " ";
-		cmd << "-ac 1                  ";
-		cmd << "-i -                   ";
-		cmd << "audio.wav              ";
+		cmd << "ffmpeg                  ";
+		cmd << "-y                      ";
+		cmd << "-hide_banner            ";
+		cmd << "-f s16le                ";
+		cmd << "-ac 1                   ";
+		cmd << "-ar                     ";
+		cmd << samples_per_second  << " ";
+		cmd << "-i -                    ";
+		cmd << "audio.wav               ";
 
 	assert(errno == 0);
 	file = popen(cmd.str().c_str(), "w");

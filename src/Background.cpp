@@ -13,7 +13,7 @@ void Background::draw(double t) {
 }
 
 void Background::mix(double t) {
-	short sample = sin(t * 2 * PI / 180) * SHRT_MAX;
+	short sample = sin(t * 2 * PI * 180) * (SHRT_MAX >> 1);
 	audio.mix(sample);
 }
 
@@ -28,9 +28,9 @@ void Background::addRandomPixels(double prob, int pixelWidth, int pixelHeight) {
 				int hue = Util::randomInt(0, 360);
 				double fr, fg, fb;
 				Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
-				char r = Util::doubleToChar(fr);
-				char g = Util::doubleToChar(fg);
-				char b = Util::doubleToChar(fb);
+				byte r = Util::doubleToByte(fr);
+				byte g = Util::doubleToByte(fg);
+				byte b = Util::doubleToByte(fb);
 				pixel.paint(r, g, b);
 			}
 		}

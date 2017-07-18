@@ -29,9 +29,9 @@ vector<Object *> objects;
 int main(int argc, char * argv[]) {
 	frame.clear();
 	audio.open();
-	video.open();
+//	video.open();
 	kronos.write();
-	video.close();
+//	video.close();
 	audio.close();
 	cout << "Done." << endl;
 	return 0;

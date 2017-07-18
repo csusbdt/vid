@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cassert>
 #include <sstream>
-#include <sys/stat.h>
 #include "globals.h"
 #include "Video.h"
 

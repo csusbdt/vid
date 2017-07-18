@@ -15,11 +15,12 @@ bool Util::randomBool(double p) {
         return (rand() / (double) RAND_MAX) < p;
 }
 
-char Util::doubleToChar(double x) {
+byte Util::doubleToByte(double x) {
+	assert(x >= 0.0);
 	assert(x <= 1.0);
 	int i = x * 256;
 	if (i >= 256) i = 255;
-	return (char) i;
+	return (byte) i;
 }
 
 void Util::HSVtoRGB(double * r, double * g, double * b, double h, double s, double v) {

@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #include "Frame.h"
 #include "Rect.h"
 #include "Util.h"
@@ -17,12 +18,10 @@ void Frame::clear() {
 }
 
 void Frame::setPixel(int x, int y, byte r, byte g, byte b) {
+	clamp(&x, &y);
 	data[y * frame_width * 3 + x * 3 + 0] = r;
 	data[y * frame_width * 3 + x * 3 + 1] = g;
 	data[y * frame_width * 3 + x * 3 + 2] = b;
-	//data[y * frame_width + x + 0][0] = r;
-	//data[y * frame_width + x + 1][1] = g;
-	//data[y * frame_width + x + 2][2] = b;
 }
 
 /*! Write frame data into output stream. */
@@ -47,9 +46,9 @@ void Frame::addRandomPixels(double prob, int pixelWidth, int pixelHeight) {
 				int hue = Util::randomInt(0, 360);
 				double fr, fg, fb;
 				Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
-				char r = Util::doubleToChar(fr);
-				char g = Util::doubleToChar(fg);
-				char b = Util::doubleToChar(fb);
+				byte r = Util::doubleToByte(fr);
+				byte g = Util::doubleToByte(fg);
+				byte b = Util::doubleToByte(fb);
 				pixel.paint(r, g, b);
 			}
 		}
