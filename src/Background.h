@@ -4,12 +4,14 @@
 
 class Background : public Object {
 public:
-	Background() : Object() {}
+	Background() : randomPixelProbability(.002) {}
 	virtual ~Background() {}
 	virtual void mix(double t);
 	virtual void draw(double t);
 	void init();
+	void setRandomPixelProbability(double p);
+
 private:
-	void addRandomPixels(double prob, int pixelWidth = 4, int pixelHeight = 4);
+	double randomPixelProbability;
 };
 

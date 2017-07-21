@@ -14,20 +14,22 @@ Approach:
 #include <iostream>
 #include <cassert>
 #include <cerrno>
-#include "globals.h"
+#include <vector>
+#include "Kronos.h"
+#include "Audio.h"
+#include "Video.h"
+#include "Object.h"
 
 using namespace std;
 
 // Define all global variables.
 Kronos kronos;
-Frame frame;
 Audio audio;
 Video video;
-Background background;
 vector<Object *> objects;
 
 int main(int argc, char * argv[]) {
-	frame.clear();
+	video.clearFrame();
 	audio.open();
 	video.open();
 	kronos.write();

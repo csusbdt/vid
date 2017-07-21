@@ -6,10 +6,19 @@
 #include <vector>
 #include "Kronos.h"
 #include "globals.h"
-//#include "Disc.h"
+#include "Object.h"
+#include "Audio.h"
+#include "Video.h"
 
+using namespace std;
+
+//#include "Disc.h"
 //static Disc disc;
 //	Disc disc(Frame::w / 2, Frame::h / 2, Frame::h / 5);
+
+extern vector<Object *> objects;
+extern Audio audio;
+extern Video video;
 
 int Kronos::write() {
 	// Convert to scenes.
@@ -18,7 +27,7 @@ int Kronos::write() {
 
 	double t = 0;  // Time t is in seconds.
 	double nextFrameTime = 0;
-	frame.addRandomPixels(4, 4, 1.0);
+	video.setRandomPixels(1.0);
 	for (double t = 0; t < duration_in_seconds; t += 1.0 / samples_per_second) {
 		for (int i = 0; i < objects.size(); ++i) {
 			Object * object = objects[i];
