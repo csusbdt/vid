@@ -9,8 +9,8 @@ public:
 	virtual void update(double dt);
 	virtual void draw(double t) {}
 	virtual void mix(double t);
-	virtual void activate() {}
-	virtual void deactivate() {}
+	virtual void activate();
+	virtual void deactivate();
 //	void reset();
 
 private:

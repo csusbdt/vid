@@ -18,12 +18,15 @@ public:
 	void clearFrame();
 	void clamp(int * x, int * y);
 	void setPixel(int x, int y, double hue);
+	void fillRandom();
 
 	byte * frame;
 
+// Try to use in CircleScene setup:
+//	void setRandomPixels(double prob = 1, Rect region = Rect());
+
 //	void setPixelDimensions(int pixelWidth, int pixelHeight);
 //	void setPixel(int x, int y, byte r, byte g, byte b);
-//	void setRandomPixels(double prob = 1, Rect region = Rect());
 
 private:
 	FILE * file;

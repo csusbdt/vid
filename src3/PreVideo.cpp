@@ -32,27 +32,18 @@ void PreVideo::setPixel(int x, int y, double hue) {
 	}
 }
 
-/*
-void Video::setPixelDimensions(int pixelWidth, int pixelHeight) {
-	this->pixelWidth = pixelWidth;
-	this->pixelHeight = pixelHeight;
-}
-
-void Video::setRandomPixels(double prob, Rect region) {
-	Rect pixel(0, 0, pixelWidth, pixelHeight);
-	for (pixel.y = 0; pixel.y < frame_height; pixel.y += pixelHeight) {
-		for (pixel.x = 0; pixel.x < frame_width; pixel.x += pixelWidth) {
-			if (Util::randomBool(prob)) {
-				int hue = Util::randomInt(0, 360);
-				double fr, fg, fb;
-				Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
-				byte r = Util::doubleToByte(fr);
-				byte g = Util::doubleToByte(fg);
-				byte b = Util::doubleToByte(fb);
-				pixel.paint(r, g, b);
-			}
+void PreVideo::fillRandom() {
+	for (int x = 0; x < width; ++x) {
+		for (int y = 0; y < height; ++y) {
+			setPixel(x, y, Util::randomInt(0, 360));
 		}
 	}	
+}
+
+/*
+void PreVideo::setPixelDimensions(int pixelWidth, int pixelHeight) {
+	this->pixelWidth = pixelWidth;
+	this->pixelHeight = pixelHeight;
 }
 */
 

@@ -2,10 +2,20 @@
 #include "Circle.h"
 #include "Util.h"
 #include "Audio.h"
+#include "Loop.h"
 
 extern Audio audio;
+extern Loop loop;
 
 Circle::Circle(Wave * wave) : wave(wave) {
+}
+
+void Circle::activate() {
+	loop.addObject(this);
+}
+
+void Circle::deactivate() {
+	loop.removeObject(this);
 }
 
 void Circle::mix(double t) {

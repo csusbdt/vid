@@ -6,9 +6,6 @@
 
 using namespace std;
 
-//Rect Video::rect(0, 0, frame_width, frame_height);
-
-//Video::Video() : pixelWidth(4), pixelHeight(4), file(nullptr) {
 Video::Video() : file(nullptr) {
 	frame = new byte[width * height * 3]; 
 }
@@ -37,30 +34,6 @@ void Video::setPixel(int x, int y, byte r, byte g, byte b) {
 	frame[y * width * 3 + x * 3 + 1] = g;
 	frame[y * width * 3 + x * 3 + 2] = b;
 }
-
-/*
-void Video::setPixelDimensions(int pixelWidth, int pixelHeight) {
-	this->pixelWidth = pixelWidth;
-	this->pixelHeight = pixelHeight;
-}
-
-void Video::setRandomPixels(double prob, Rect region) {
-	Rect pixel(0, 0, pixelWidth, pixelHeight);
-	for (pixel.y = 0; pixel.y < frame_height; pixel.y += pixelHeight) {
-		for (pixel.x = 0; pixel.x < frame_width; pixel.x += pixelWidth) {
-			if (Util::randomBool(prob)) {
-				int hue = Util::randomInt(0, 360);
-				double fr, fg, fb;
-				Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
-				byte r = Util::doubleToByte(fr);
-				byte g = Util::doubleToByte(fg);
-				byte b = Util::doubleToByte(fb);
-				pixel.paint(r, g, b);
-			}
-		}
-	}	
-}
-*/
 
 void Video::open() {
 	stringstream video_cmd;
@@ -98,8 +71,5 @@ void Video::open() {
 void Video::close() {
 	fflush(file);
 	pclose(file);
-}
-
-void Video::onSample(signed short sample) {
 }
 

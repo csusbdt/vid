@@ -15,16 +15,14 @@ class CircleScene : public Scene {
 public:
 	CircleScene();
 	virtual ~CircleScene();
-	virtual void start();
-	virtual void stop();
-	virtual void update(double dt);
-
-	virtual void mix(double t);
-	virtual void draw(double t);
 	virtual void activate();
 	virtual void deactivate();
+	virtual void update(double dt);
+	virtual void draw(double t);
+	virtual void mix(double t);
 
 private:
+	bool firstFrame;
 	vector<Circle> circles;
 	Wave1 wave1;
 	Wave2 wave2;

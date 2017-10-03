@@ -16,19 +16,12 @@ public:
 	void close();
 	void writeFrame();
 	void clearFrame();
-	void clamp(int * x, int * y);
 	void setPixel(int x, int y, byte r, byte g, byte b);
-	void onSample(signed short sample);
 
-	byte * frame;
-
-//	void setPixelDimensions(int pixelWidth, int pixelHeight);
-//	void setPixel(int x, int y, byte r, byte g, byte b);
-//	void setRandomPixels(double prob = 1, Rect region = Rect());
+	byte * frame; // Make private.
 
 private:
+	void clamp(int * x, int * y);
 	FILE * file;
-//	int pixelWidth;
-//	int pixelHeight;
 };
 
