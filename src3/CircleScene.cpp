@@ -9,12 +9,7 @@ using namespace std;
 extern Loop loop;
 extern PreVideo preVideo;
 
-CircleScene::CircleScene() : firstFrame(true) { 
-	circles.push_back(Circle(&wave1));
-	circles.push_back(Circle(&wave2));
-	circles.push_back(Circle(&wave3));
-	circles.push_back(Circle(&wave4));
-	circles.push_back(Circle(&wave5));
+CircleScene::CircleScene() : firstFrame(true), circle(.5, .5) { 
 }
 
 CircleScene::~CircleScene() {
@@ -27,20 +22,11 @@ void CircleScene::update(double dt) {
 void CircleScene::mix(double t) {
 }
 
-/*
-void CircleScene::drawFirstFrame() {
-	for (int x = 0; x < preVideo.width; ++x) {
-		for (int y = 0; y < preVideo.height; ++y) {
-			preVideo.setPixel(x, y, Util::randomInt(0, 360));
-		}
-	}	
-}
-*/
-
 void CircleScene::draw(double t) {
-	if (firstFrame) { // Only fill
+	if (firstFrame) { 
 		preVideo.fillRandom();
 		firstFrame = false;
+		return;
 	}
 	for (int x = 0; x < preVideo.width; ++x) {
 		for (int y = 0; y < preVideo.height; ++y) {
@@ -53,15 +39,11 @@ void CircleScene::draw(double t) {
 
 void CircleScene::activate() {
 	loop.addObject(this);
-	for (int i = 0; i < circles.size(); ++i) {
-		circles[i].activate();
-	}
+	circle.activate();
 }
 
 void CircleScene::deactivate() {
-	for (int i = 0; i < circles.size(); ++i) {
-		circles[i].deactivate();
-	}
+	circle.deactivate();
 	loop.removeObject(this);
 }
 

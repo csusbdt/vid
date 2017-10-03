@@ -7,7 +7,7 @@
 extern Audio audio;
 extern Loop loop;
 
-Circle::Circle(Wave * wave) : wave(wave) {
+Circle::Circle(double x, double y) : x(x), y(y) {
 }
 
 void Circle::activate() {
@@ -19,18 +19,24 @@ void Circle::deactivate() {
 }
 
 void Circle::mix(double t) {
-	audio.mix(wave->sample(t));
 }
 
+void Circle::update(double dt) {
+}
+
+void Circle::draw(double t) {
+}
+
+
+
 /*
+
 Circle::Circle(Wave * wave) 
 : radius(0), x(0), y(0), r(255), g(255), b(255), dy(0), xPixel(0), yPixel(0), elapsedSeconds(0), repetitions(3), wave(wave) {
 	setHue(30);
 	p = 0.30;
 }
-*/
 
-/*
 void Circle::reset() {
 	elapsedSeconds = 0;
 	x = Util::randomDouble(0, 1);
@@ -43,9 +49,7 @@ void Circle::reset() {
 	setHue(Util::randomInt(0, 360));
 	repetitions = Util::randomInt(3, 9);
 }
-*/
 
-/*
 bool Circle::draw(int i, int j) const {
 	double distPixel = sqrt((xPixel - i) * (xPixel - i) + (yPixel - j) * (yPixel - j));
 	// Convert distance from circle center to distance from circle edge.
@@ -63,10 +67,8 @@ bool Circle::draw(int i, int j) const {
 		return false;
 	}
 }
-*/
 
 void Circle::update(double dt) {
-/*
 	//elapsedMillis += deltaMillis;
 	elapsedSeconds += dt;
 	radius += dRadius * dt;
@@ -78,10 +80,8 @@ void Circle::update(double dt) {
 		}
 	} 
 	radiusPixel = dPixels(radius);
-*/
 }
 
-/*
 void Circle::setHue(int hue) {
 	double fr, fg, fb;
 	Util::HSVtoRGB(&fr, &fg, &fb, hue, 1.0, 1.0);
@@ -89,5 +89,6 @@ void Circle::setHue(int hue) {
 	g = Util::doubleToChar(fg);
 	b = Util::doubleToChar(fb);
 }
+
 */
 

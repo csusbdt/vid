@@ -1,9 +1,6 @@
 c++                                \
     -std=c++11                     \
     *.cpp                          \
-    ../../ambient-music/api/*.cpp  \
-    -I .                           \
-    -I ../../ambient-music/api     \
 &&                                 \
 ./a.out                            \
 &&                                 \
@@ -19,3 +16,6 @@ ffmpeg                             \
 &&                                 \
 open kronos.mp4
 
+#    ../../ambient-music/api/*.cpp  \
+#    -I .                           \
+#    -I ../../ambient-music/api     \
