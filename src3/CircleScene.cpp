@@ -1,15 +1,17 @@
 #include <iostream>
 #include "CircleScene.h"
+#include "Loop.h"
 
 using namespace std;
 
+extern Loop loop;
+
 CircleScene::CircleScene() { 
-	circles.push_back(Circle());
-	circles.push_back(Circle());
-	circles.push_back(Circle());
-	circles.push_back(Circle());
-	circles.push_back(Circle());
-	circles.push_back(Circle());
+	circles.push_back(Circle(&wave1));
+	circles.push_back(Circle(&wave2));
+	circles.push_back(Circle(&wave3));
+	circles.push_back(Circle(&wave4));
+	circles.push_back(Circle(&wave5));
 }
 
 CircleScene::~CircleScene() {
@@ -37,8 +39,14 @@ void CircleScene::draw(double t) {
 }
 
 void CircleScene::activate() {
+	for (int i = 0; i < circles.size(); ++i) {
+		loop.addObject(&circles[i]);
+	}
 }
 
 void CircleScene::deactivate() {
+	for (int i = 0; i < circles.size(); ++i) {
+		loop.removeObject(&circles[i]);
+	}
 }
 

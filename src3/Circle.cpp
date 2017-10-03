@@ -1,16 +1,24 @@
 #include <cmath>
 #include "Circle.h"
 #include "Util.h"
+#include "Audio.h"
+
+extern Audio audio;
+
+Circle::Circle(Wave * wave) : wave(wave) {
+}
+
+void Circle::mix(double t) {
+	audio.mix(wave->sample(t));
+}
 
 /*
-Circle::Circle() 
-: radius(0), x(0), y(0), r(255), g(255), b(255), dy(0), xPixel(0), yPixel(0), elapsedSeconds(0), repetitions(3) {
+Circle::Circle(Wave * wave) 
+: radius(0), x(0), y(0), r(255), g(255), b(255), dy(0), xPixel(0), yPixel(0), elapsedSeconds(0), repetitions(3), wave(wave) {
 	setHue(30);
 	p = 0.30;
 }
 */
-
-Circle::Circle() {}
 
 /*
 void Circle::reset() {

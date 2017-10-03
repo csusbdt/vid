@@ -1,18 +1,20 @@
 #pragma once
 
 #include "Object.h"
+#include "Wave.h"
 
 class Circle : public Object {
 public:
-	Circle();
+	Circle(Wave * wave);
 	virtual void update(double dt);
 	virtual void draw(double t) {}
-	virtual void mix(double t) {}
+	virtual void mix(double t);
 	virtual void activate() {}
 	virtual void deactivate() {}
 //	void reset();
 
 private:
+	Wave * wave;
 /*
 	bool shouldDraw(int i, int j) const;
 	void setHue(int hue);
