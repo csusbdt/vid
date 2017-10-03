@@ -16,7 +16,7 @@ void Audio::open() {
 	cmd << "-ar                   ";
 	cmd << samplesPerSecond  << " ";
 	cmd << "-i -                  ";
-	cmd << "audio.wav             ";
+	cmd << "audio.mp3             ";
 
 	assert(errno == 0);
 	file = popen(cmd.str().c_str(), "w");
