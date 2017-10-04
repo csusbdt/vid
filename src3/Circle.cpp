@@ -7,9 +7,6 @@
 extern Audio audio;
 extern Loop loop;
 
-Circle::Circle(double x, double y) : x(x), y(y) {
-}
-
 void Circle::activate() {
 	loop.addObject(this);
 }
@@ -26,8 +23,6 @@ void Circle::update(double dt) {
 
 void Circle::draw(double t) {
 }
-
-
 
 /*
 

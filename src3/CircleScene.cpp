@@ -9,7 +9,7 @@ using namespace std;
 extern Loop loop;
 extern PreVideo preVideo;
 
-CircleScene::CircleScene() : firstFrame(true), circle(.5, .5) { 
+CircleScene::CircleScene() : firstFrame(true), circle(.5, .5, 180, 16, 8) { 
 }
 
 CircleScene::~CircleScene() {
