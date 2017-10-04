@@ -47,10 +47,10 @@ public:
 		double h);
 
 	Sound(	double startTime   =  0    , 
-		double duration    = 30    , 
+		double duration    = 12    , 
 		double attack      =  0.01 , 
 		double decay       =  0.02 ,
-		double release     =  0.04 ,
+		double release     =  0.50 ,
 		double attackDelta =  1.00 ,
 		double decayDelta  =  0.10
 	) :
