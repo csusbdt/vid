@@ -16,6 +16,7 @@ void Audio::open() {
 	cmd << "-ar                   ";
 	cmd << samplesPerSecond  << " ";
 	cmd << "-i -                  ";
+	cmd << "-write_xing 0         ";
 	cmd << "audio.mp3             ";
 
 	assert(errno == 0);

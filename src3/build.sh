@@ -12,6 +12,7 @@ ffmpeg                             \
     -c:v copy                      \
     -map 0:v:0                     \
     -map 1:a:0                     \
+    -shortest                      \
     kronos.mp4                     \
 &&                                 \
 open kronos.mp4

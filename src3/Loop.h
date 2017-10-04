@@ -6,7 +6,7 @@ using namespace std;
 
 class Loop {
 public:
-	const double durationInSeconds = 5.0;
+	const double durationInSeconds = 20.0;
 
 	void run();
 	void addObject(Object * object);

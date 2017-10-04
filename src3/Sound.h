@@ -3,7 +3,7 @@
 #include <cassert>
 #include <string>
 #include <cstdio>
-#include "Envelope.h"
+//#include "Envelope.h"
 #include "Object.h"
 
 using namespace std;
@@ -65,13 +65,13 @@ public:
 		assert(duration > attack + decay + release); 
 	}
 
-	double startTime;
-	double duration;
-	double attack;
-	double decay;
-	double release;
-	double attackDelta; // normalized
-	double decayDelta;  // normalized
+	double startTime   ;
+	double duration    ;
+	double attack      ;
+	double decay       ;
+	double release     ;
+	double attackDelta ; // normalized
+	double decayDelta  ; // normalized
 
 	virtual void activate()        {}
 	virtual void deactivate()      {}

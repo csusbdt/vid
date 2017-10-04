@@ -16,6 +16,7 @@ void Circle::deactivate() {
 }
 
 void Circle::mix(double t) {
+	wave.mix(t);
 }
 
 void Circle::update(double dt) {

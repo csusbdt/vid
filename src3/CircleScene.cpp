@@ -16,6 +16,16 @@ CircleScene::~CircleScene() {
 	deactivate();
 }
 
+void CircleScene::activate() {
+	loop.addObject(this);
+	circle.activate();
+}
+
+void CircleScene::deactivate() {
+	circle.deactivate();
+	loop.removeObject(this);
+}
+
 void CircleScene::update(double dt) {
 }
 
@@ -35,15 +45,5 @@ void CircleScene::draw(double t) {
 			}
 		}
 	}	
-}
-
-void CircleScene::activate() {
-	loop.addObject(this);
-	circle.activate();
-}
-
-void CircleScene::deactivate() {
-	circle.deactivate();
-	loop.removeObject(this);
 }
 
