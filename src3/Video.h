@@ -6,9 +6,9 @@ typedef unsigned char byte;
 
 class Video {
 public:
-	const int width = 720;
-	const int height = 480;
-	const int framesPerSecond = 30;
+//	const int width = 720;
+//	const int height = 480;
+//	const int framesPerSecond = 30;
 
 	Video();
 	~Video();

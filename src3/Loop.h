@@ -6,11 +6,10 @@ using namespace std;
 
 class Loop {
 public:
-	const double durationInSeconds = 20.0;
-
 	void run();
-	void addObject(Object * object);
-	void removeObject(Object * object);
+	void addObject(Object * object); 
+	void removeObject(const Object * object);
+	int indexOf(const Object * object) const;
 
 private:
 	vector<Object *> objects;

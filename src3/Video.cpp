@@ -6,6 +6,10 @@
 
 using namespace std;
 
+extern const double framesPerSecond;
+extern const int width;
+extern const int height;
+
 Video::Video() : file(nullptr) {
 	frame = new byte[width * height * 3]; 
 }
@@ -48,7 +52,7 @@ void Video::open() {
 	video_cmd << height                 ;
 	video_cmd << "                     ";
 	video_cmd << "-framerate           "; 
-	video_cmd << framesPerSecond        ;
+	video_cmd << (int) framesPerSecond  ;
 	video_cmd << "                     ";
 	video_cmd << "-i -                 "; // read data from standard input stream
 	video_cmd << "-pix_fmt yuv420p     "; // to render with Quicktime

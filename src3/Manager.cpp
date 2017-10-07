@@ -1,19 +1,11 @@
+#include <cassert>
 #include "Manager.h"
 #include "Util.h"
 #include "Loop.h"
 #include "PreVideo.h"
 
-extern Loop loop;
 extern PreVideo preVideo;
-
-void Manager::update(double dt) {
-}
-
-void Manager::mix(double t) {
-}
-
-void Manager::draw(double t) {
-}
+extern Loop loop;
 
 void Manager::activate() {
 	for (int x = 0; x < preVideo.width; ++x) {
@@ -23,6 +15,7 @@ void Manager::activate() {
 	}	
 	loop.addObject(this);
 	circleScene.activate();
+	//assert(loop.indexOf(this) < loop.indexOf(&circleScene);
 }
 
 void Manager::deactivate() {

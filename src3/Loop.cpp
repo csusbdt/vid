@@ -10,23 +10,24 @@ using namespace std;
 extern Audio audio;
 extern Video video;
 extern Manager * manager;
+extern double videoDurationInSeconds;
+extern double samplesPerSecond;
+extern double framesPerSecond;
+extern int width;
+extern int height;
 
 void Loop::run() {
-	audio.open();
-	video.open();
-	video.clearFrame();
-	manager->activate();
-	int durationInFrames = (int) (durationInSeconds * video.framesPerSecond);
-	double secondsPerFrame = 1.0 / video.framesPerSecond;
+	int durationInFrames = (int) (videoDurationInSeconds * framesPerSecond);
+	double secondsPerFrame = 1.0 / framesPerSecond;
 	int sampleNumber = 0;
 	for (int frameNumber = 0; frameNumber < durationInFrames; ++frameNumber) {
 		// Update objects.
 		for (auto obj : objects) {
-			obj->update(secondsPerFrame);
+			if (frameNumber > 0) obj->update(secondsPerFrame);
 		}
 
-		// Generate next video frame.
-		double t = frameNumber / (double) video.framesPerSecond;
+		// Generate and write the next video frame.
+		double t = frameNumber / (double) framesPerSecond;
 		for (auto obj : objects) {
 			obj->draw(t);
 		}
@@ -34,9 +35,9 @@ void Loop::run() {
 
 		// Generate audio samples to cover one frame of video.
 		int sampleNumberTarget = 
-			frameNumber / video.framesPerSecond * audio.samplesPerSecond;
+			frameNumber / framesPerSecond * samplesPerSecond;
 		while (sampleNumber < sampleNumberTarget) {
-			double t = sampleNumber / (double) audio.samplesPerSecond;
+			double t = sampleNumber / (double) samplesPerSecond;
 			for (auto obj : objects) {
 				obj->mix(t);
 			}
@@ -44,8 +45,6 @@ void Loop::run() {
 			++sampleNumber;
 		}
 	}
-	video.close();
-	audio.close();
 }
 
 void Loop::addObject(Object * object) {
@@ -53,7 +52,14 @@ void Loop::addObject(Object * object) {
 	objects.push_back(object);
 }
 
-void Loop::removeObject(Object * object) {
+int Loop::indexOf(const Object * object) const {
+	for (int i = 0; i < objects.size(); ++i) {
+		if (objects[i] == object) return i;
+	}
+	assert(false);
+}
+
+void Loop::removeObject(const Object * object) {
 	assert(objects.size() > 0);
 	int i = 0;
 	while (objects[i] != object) { 
