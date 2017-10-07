@@ -6,14 +6,9 @@
 #include "Video.h"
 #include "PreVideo.h"
 #include "Manager.h"
+#include "globals.h"
 
 using namespace std;
-
-double videoDurationInSeconds = 20;
-double samplesPerSecond = 48000.0;
-double framesPerSecond = 30;
-int width = 720;
-int height = 480;
 
 Loop loop;
 Audio audio;

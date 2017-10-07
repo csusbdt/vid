@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Video.h"
 #include "Util.h"
+#include "globals.h"
 
 using namespace std;
 

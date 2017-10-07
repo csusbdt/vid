@@ -3,9 +3,7 @@
 #include "Util.h"
 #include "Loop.h"
 #include "PreVideo.h"
-
-extern PreVideo preVideo;
-extern Loop loop;
+#include "globals.h"
 
 void Manager::activate() {
 	for (int x = 0; x < preVideo.width; ++x) {

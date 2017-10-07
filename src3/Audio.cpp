@@ -3,6 +3,7 @@
 #include <sstream>
 #include <sys/stat.h>
 #include "Audio.h"
+#include "globals.h"
 
 using namespace std;
 
@@ -14,7 +15,8 @@ void Audio::open() {
 	cmd << "-f s16le              ";
 	cmd << "-ac 1                 ";
 	cmd << "-ar                   ";
-	cmd << samplesPerSecond  << " ";
+	cmd << (int) samplesPerSecond  ;
+	cmd << " "                     ;
 	cmd << "-i -                  ";
 	cmd << "-write_xing 0         ";
 	cmd << "audio.mp3             ";

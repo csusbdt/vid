@@ -4,17 +4,9 @@
 #include "Audio.h"
 #include "Video.h"
 #include "Manager.h"
+#include "globals.h"
 
 using namespace std;
-
-extern Audio audio;
-extern Video video;
-extern Manager * manager;
-extern double videoDurationInSeconds;
-extern double samplesPerSecond;
-extern double framesPerSecond;
-extern int width;
-extern int height;
 
 void Loop::run() {
 	int durationInFrames = (int) (videoDurationInSeconds * framesPerSecond);
