@@ -6,9 +6,9 @@ typedef unsigned char byte;
 
 class PreVideo {
 public:
-	const int width = 720 / 4;
-	const int height = 480 / 4;
-	const int framesPerSecond = 30;
+	//const int width = 720 / 4;
+	//const int height = 480 / 4;
+	//const int framesPerSecond = 30;
 
 	PreVideo();
 	~PreVideo();
@@ -18,7 +18,9 @@ public:
 	void clearFrame();
 	void clamp(int * x, int * y);
 	void setPixel(int x, int y, double hue);
-	void fillRandom();
+	//void fillRandom();
+	int getPreWidth() const;
+	int getPreHeight() const;
 
 	byte * frame;
 
@@ -30,6 +32,8 @@ public:
 
 private:
 	FILE * file;
+	int preWidth;
+	int preHeight;
 	int pixelWidth;
 	int pixelHeight;
 };

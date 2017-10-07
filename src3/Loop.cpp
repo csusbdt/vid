@@ -44,12 +44,12 @@ void Loop::addObject(Object * object) {
 	objects.push_back(object);
 }
 
-int Loop::indexOf(const Object * object) const {
-	for (int i = 0; i < objects.size(); ++i) {
-		if (objects[i] == object) return i;
-	}
-	assert(false);
-}
+//int Loop::indexOf(const Object * object) const {
+//	for (int i = 0; i < objects.size(); ++i) {
+//		if (objects[i] == object) return i;
+//	}
+//	assert(false);
+//}
 
 void Loop::removeObject(const Object * object) {
 	assert(objects.size() > 0);

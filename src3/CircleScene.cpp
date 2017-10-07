@@ -3,11 +3,9 @@
 #include "Loop.h"
 #include "PreVideo.h"
 #include "Util.h"
+#include "globals.h"
 
 using namespace std;
-
-extern Loop loop;
-extern PreVideo preVideo;
 
 CircleScene::CircleScene() : firstFrame(true), circle(.5, .5, 180, 16, 8) { 
 }
@@ -33,13 +31,8 @@ void CircleScene::mix(double t) {
 }
 
 void CircleScene::draw(double t) {
-	if (firstFrame) { 
-		preVideo.fillRandom();
-		firstFrame = false;
-		return;
-	}
-	for (int x = 0; x < preVideo.width; ++x) {
-		for (int y = 0; y < preVideo.height; ++y) {
+	for (int x = 0; x < preVideo.getPreWidth(); ++x) {
+		for (int y = 0; y < preVideo.getPreHeight(); ++y) {
 			if (Util::randomBool(.01)) {
 				preVideo.setPixel(x, y, Util::randomInt(0, 360));
 			}

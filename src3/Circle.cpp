@@ -3,9 +3,7 @@
 #include "Util.h"
 #include "Audio.h"
 #include "Loop.h"
-
-extern Audio audio;
-extern Loop loop;
+#include "globals.h"
 
 void Circle::activate() {
 	loop.addObject(this);

@@ -4,15 +4,24 @@
 #include "PreVideo.h"
 #include "Video.h"
 #include "Util.h"
+#include "globals.h"
 
 using namespace std;
 
-extern Video video;
-
 PreVideo::PreVideo() : pixelWidth(4), pixelHeight(4) {
+	preWidth  = 720 / 4;
+	preHeight = 480 / 4;
 }
 
 PreVideo::~PreVideo() { 
+}
+
+int PreVideo::getPreWidth() const {
+	return preWidth;
+}
+
+int PreVideo::getPreHeight() const {
+	return preHeight;
 }
 
 void PreVideo::setPixel(int x, int y, double hue) {
@@ -32,13 +41,13 @@ void PreVideo::setPixel(int x, int y, double hue) {
 	}
 }
 
-void PreVideo::fillRandom() {
-	for (int x = 0; x < width; ++x) {
-		for (int y = 0; y < height; ++y) {
-			setPixel(x, y, Util::randomInt(0, 360));
-		}
-	}	
-}
+//void PreVideo::fillRandom() {
+//	for (int x = 0; x < width; ++x) {
+//		for (int y = 0; y < height; ++y) {
+//			setPixel(x, y, Util::randomInt(0, 360));
+//		}
+//	}	
+//}
 
 /*
 void PreVideo::setPixelDimensions(int pixelWidth, int pixelHeight) {

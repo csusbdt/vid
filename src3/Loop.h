@@ -6,10 +6,10 @@ using namespace std;
 
 class Loop {
 public:
-	void run();
-	void addObject(Object * object); 
-	void removeObject(const Object * object);
-	int indexOf(const Object * object) const;
+	void run          ()                            ;
+	void addObject    (Object * object)             ;
+	void removeObject (const Object * object)       ;
+	//int  indexOf      (const Object * object) const ;
 
 private:
 	vector<Object *> objects;
