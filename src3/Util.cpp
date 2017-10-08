@@ -23,7 +23,13 @@ byte Util::doubleToByte(double x) {
 	return (byte) i;
 }
 
-void Util::HSVtoRGB(double h, double s, double v, double * r, double * g, double * b) {
+void Util::HSVtoRGB( double   h, 
+                    double   s, 
+                    double   v, 
+                    double * r, 
+                    double * g, 
+                    double * b 
+) {
 	int i;
 	double f, p, q, t;
 

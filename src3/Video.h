@@ -1,27 +1,22 @@
 #pragma once
 
 #include <stdio.h>
-
-typedef unsigned char byte;
+#include "globals.h"
 
 class Video {
 public:
-//	const int width = 720;
-//	const int height = 480;
-//	const int framesPerSecond = 30;
-
-	Video();
-	~Video();
-	void open();
-	void close();
-	void writeFrame();
-	void clearFrame();
-	void setPixel(int x, int y, byte r, byte g, byte b);
-
-	byte * frame; // Make private.
+	Video            ();
+	~Video           ();
+	void open        ();
+	void close       ();
+	void writeFrame  ();
+	void clearFrame  ();
+	void setPixel    (int x, int y, byte r, byte g, byte b);
 
 private:
-	void clamp(int * x, int * y);
 	FILE * file;
+	byte * frame;
+
+	void clamp(int * x, int * y);
 };
 

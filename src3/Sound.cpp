@@ -3,15 +3,9 @@
 #include <cassert>
 #include "Sound.h"
 #include "Audio.h"
+#include "globals.h"
 
 using namespace std;
-
-const double Sound::PI = 3.141592653589793238462;
-const double Sound::PHI = 1.61803398875;
-const double Sound::E = 2.718281828459;
-const unsigned int Sound::samplesPerSecond = 48000;
-
-extern Audio audio;
 
 // See http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
 double Sound::scale(

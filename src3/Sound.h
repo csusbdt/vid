@@ -3,18 +3,13 @@
 #include <cassert>
 #include <string>
 #include <cstdio>
-//#include "Envelope.h"
 #include "Object.h"
+#include "globals.h"
 
 using namespace std;
 
 class Sound : public Object {
 public:
-	static const double PI;
-	static const double PHI;
-	static const double E;
-	static const unsigned int samplesPerSecond;
-
 	static double scale(
 		double octaveTones, 
 		double baseFrequency, 
@@ -73,17 +68,16 @@ public:
 	double attackDelta ; // normalized
 	double decayDelta  ; // normalized
 
-	virtual void activate()        {}
-	virtual void deactivate()      {}
-	virtual void update(double dt) {}
-	virtual void draw(double t)    {}
+	virtual void activate   ()           {}
+	virtual void deactivate ()           {}
+	virtual void update     (double dt)  {}
+	virtual void draw       (double t)   {}
 
-	// Make private to hide from subclasses.
-	void mix(double t); // Calls sample() from subclass.
-
-	virtual double sample(double seconds) const = 0;
+	void mix(double t);
 
 protected:
+	virtual double sample(double seconds) const = 0;
+
 	double envelope(double clockTime, double sample) const;
 };
 
