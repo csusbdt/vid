@@ -20,7 +20,6 @@ int main(int argc, char * args[]) {
 	assert(samplesPerSecond * videoDurationInSeconds < INT_MAX);
 	audio.open();
 	video.open();
-	video.clearFrame();
 	manager.activate();
 	loop.run();
 	video.close();

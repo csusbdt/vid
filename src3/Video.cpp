@@ -71,6 +71,7 @@ void Video::open() {
 		cout << endl;
 		exit(1);
 	}
+	clearFrame();
 }
 
 void Video::close() {
